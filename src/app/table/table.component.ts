@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../http.service';
 
 
-export interface Carrier {
+export interface UserCarrier {
   id: number;
-  carrierName: string;
-  carrierLogo: string;
-  status: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
 }
 
 @Component({
@@ -21,14 +21,22 @@ export interface Carrier {
 export class TableComponent implements OnInit {
 
   dataSource:any;
-  public carriersSet: Carrier[];
-  displayedColumns: string[] = ['id', 'name', 'logo', 'status'];
+  public carriersSet: UserCarrier[];
+  displayedColumns: string[] = ['name', 'logo', 'status', 'but'];
 
   constructor(private http:HttpService) { 
-      this.http.getCarriers().subscribe((result:Carrier[]) => { this.carriersSet = result;
+      this.http.getCarriers().subscribe((result:UserCarrier[]) => { this.carriersSet = result;
       this.dataSource = new MatTableDataSource(this.carriersSet);
       this.dataSource.sort = this.sort;
     });
+  }
+
+  clickDelete(carrier:UserCarrier){
+    console.log(carrier);
+    if(confirm(`Are you sure to delete ${carrier.firstName}?`)){
+      this.http.deleteUser(carrier.id).subscribe(res=>console.log(res));
+      window.location.reload();
+    }
   }
 
   @ViewChild(MatSort) sort: MatSort;

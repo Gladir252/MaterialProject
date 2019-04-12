@@ -3,10 +3,12 @@
     <button mat-icon-button color="white" [routerLink]="['home']">
       <mat-icon>home</mat-icon>
     </button>
+    <button mat-button *ngIf="_authService.loggedIn()" [routerLink]="['table']">Table</button>
+    <button mat-button>Create</button>
   </div>
   <div>
-    <button mat-button>Create</button>
-    <button mat-button [routerLink]="['table']">Table</button>
-    <button mat-button [routerLink]="['login']">Login</button>
+    <button mat-button *ngIf="!_authService.loggedIn()" [routerLink]="['login']">Login</button>
+    <button mat-button *ngIf="!_authService.loggedIn()" [routerLink]="['registration']">Registration</button>
+    <button mat-button *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()">Logout</button>
   </div>
 </mat-toolbar>
