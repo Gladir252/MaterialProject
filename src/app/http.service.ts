@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { UserCarrier } from './table/table.component';
 import { LoginUser } from './models/loginUser';
 import { Router } from '@angular/router';
 import { RegistrationUser } from './models/registrationUser';
+import { AddUserCarrier } from './models/addUserCarrier';
+import { Carrier } from './models/Carrier';
 
 const BASE_URL = 'http://localhost:50133/api/';
 @Injectable({
@@ -11,39 +13,43 @@ const BASE_URL = 'http://localhost:50133/api/';
 })
 export class HttpService {
 
-  
-  constructor(private http:HttpClient, private router:Router) { }
+
+  constructor(private http: HttpClient, private router: Router) { }
 
 
-
-  getCarriers(){
-    return this.http.get<UserCarrier[]>(BASE_URL+'admin/GetAllUsers');
+  addUserCarrier(body: AddUserCarrier) {
+    return this.http.post(BASE_URL + 'admin/CreateUser', body, { responseType: 'text' })
   }
 
-  login(body:LoginUser){
-     return this.http.post(BASE_URL+'auth/Login', body,{responseType:'text'})//.subscribe((result)=>{
-    //   console.log(result)      
-    // }, (err)=>{console.log(err)});
+  getUserCarriers() {
+    return this.http.get<UserCarrier[]>(BASE_URL + 'admin/GetAllUsers');
+  }
+  getCarriers() {
+    return this.http.get<Carrier[]>(BASE_URL + 'admin/GetAllCarriers');
   }
 
-  registration(body:RegistrationUser){
-    return this.http.post(BASE_URL+'auth/Registration', body,{responseType:'text'})
+  login(body: LoginUser) {
+    return this.http.post(BASE_URL + 'auth/Login', body, { responseType: 'text' })
   }
 
-  loggedIn(){
+  registration(body: RegistrationUser) {
+    return this.http.post(BASE_URL + 'auth/Registration', body, { responseType: 'text' })
+  }
+
+  loggedIn() {
     return !!localStorage.getItem('token');
   }
 
-  logoutUser(){
+  logoutUser() {
     localStorage.removeItem('token');
     this.router.navigate(['home'])
   }
 
-  deleteUser(id:number){
-    return this.http.delete(BASE_URL+`admin/DeleteUser/${id}`,{responseType:'text'});
+  deleteUser(id: number) {
+    return this.http.delete(BASE_URL + `admin/DeleteUser/${id}`, { responseType: 'text' });
   }
 
-  getToken(){
+  getToken() {
     localStorage.getItem('token');
   }
 

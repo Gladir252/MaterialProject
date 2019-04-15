@@ -3,6 +3,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../http.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 export interface UserCarrier {
@@ -20,12 +21,21 @@ export interface UserCarrier {
 
 export class TableComponent implements OnInit {
 
+  addForm: FormGroup = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl(''),
+    confirmPassword: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    phone: new FormControl('')
+  });
+
   dataSource:any;
   public carriersSet: UserCarrier[];
-  displayedColumns: string[] = ['name', 'logo', 'status', 'but'];
+  displayedColumns: string[] = ['first name', 'last name', 'phone', 'but'];
 
   constructor(private http:HttpService) { 
-      this.http.getCarriers().subscribe((result:UserCarrier[]) => { this.carriersSet = result;
+      this.http.getUserCarriers().subscribe((result:UserCarrier[]) => { this.carriersSet = result;
       this.dataSource = new MatTableDataSource(this.carriersSet);
       this.dataSource.sort = this.sort;
     });

@@ -18,10 +18,17 @@ import { TableComponent } from './table/table.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TokenInterceptorService } from './token-interceptor.service'
 import { AuthGuard } from './auth.guard';
 import { RegistrationComponent } from './registration/registration.component';
+import { CreateUserComponent, CreateUserDialog } from './create-user/create-user.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { AddUserFormComponent } from './add-user-form/add-user-form.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+
+
 
 @NgModule({
   declarations: [
@@ -31,6 +38,9 @@ import { RegistrationComponent } from './registration/registration.component';
     LoginComponent,
     TableComponent,
     RegistrationComponent,
+    CreateUserComponent,
+    AddUserFormComponent,
+    CreateUserDialog
   ],
   imports: [
     BrowserModule,
@@ -45,8 +55,13 @@ import { RegistrationComponent } from './registration/registration.component';
     MatInputModule,
     HttpClientModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatGridListModule,
+    MatDialogModule,
+    FormsModule,
+    MatSelectModule
   ],
+  entryComponents: [CreateUserDialog],
   providers: [{
     provide:HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

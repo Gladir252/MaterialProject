@@ -4,7 +4,7 @@
       <mat-icon>home</mat-icon>
     </button>
     <button mat-button *ngIf="_authService.loggedIn()" [routerLink]="['table']">Table</button>
-    <button mat-button>Create</button>
+    <button mat-button [routerLink]="['create']">Create</button>
   </div>
   <div>
     <button mat-button *ngIf="!_authService.loggedIn()" [routerLink]="['login']">Login</button>
