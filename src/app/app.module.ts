@@ -27,6 +27,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
+import { EditUserFormComponent, EditUserDialog } from './edit-user-form/edit-user-form.component';
 
 
 
@@ -40,7 +41,9 @@ import {MatSelectModule} from '@angular/material/select';
     RegistrationComponent,
     CreateUserComponent,
     AddUserFormComponent,
-    CreateUserDialog
+    CreateUserDialog,
+    EditUserFormComponent,
+    EditUserDialog
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,7 @@ import {MatSelectModule} from '@angular/material/select';
     FormsModule,
     MatSelectModule
   ],
-  entryComponents: [CreateUserDialog],
+  entryComponents: [CreateUserDialog, EditUserDialog],
   providers: [{
     provide:HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

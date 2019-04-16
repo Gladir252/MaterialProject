@@ -1,18 +1,7 @@
-<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div> (ngSubmit)="submit()"-->
-<h1 mat-dialog-title>Adding new carrier user</h1>
+<h1 mat-dialog-title>Editing user</h1>
 <form [formGroup]="form">
     <mat-form-field>
-        <input type="email" matInput placeholder="Email*" formControlName="email" [ngClass]="{'is-invalid':
+        <input type="email" matInput placeholder="Email*" formControlName="email"  [ngClass]="{'is-invalid':
         form.get('email').touched && form.get('email').invalid}">
     </mat-form-field>
     <div *ngIf="form.get('email').touched && form.get('email').invalid" class="invalid-feedback"
@@ -67,22 +56,6 @@
         style="margin-top: -18px">
         <small *ngIf="form.get('phone').errors.required" style="color:red">*Phone is required</small>
         <small *ngIf="form.get('phone').errors.pattern" style="color:red">*Invalid format</small>
-    </div>
-
-
-    <h4>Carrier selecting</h4>
-    <mat-form-field>
-        <mat-label>Select carrier*</mat-label>
-        <mat-select [(value)]="selected" formControlName="carrierName" [ngClass]="{'is-invalid':
-        form.get('carrierName').touched && form.get('carrierName').invalid}">
-            <mat-option *ngFor="let carrier of carriersSet" [value]="carrier.carrierName">
-                {{carrier.carrierName}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <div *ngIf="form.get('carrierName').touched && form.get('carrierName').invalid" class="invalid-feedback"
-        style="margin-top: -18px">
-        <small *ngIf="form.get('carrierName').errors.required" style="color:red">*Carrier is required</small>
     </div>
 
     <div mat-dialog-actions>

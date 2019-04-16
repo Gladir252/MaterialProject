@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { RegistrationUser } from './models/registrationUser';
 import { AddUserCarrier } from './models/addUserCarrier';
 import { Carrier } from './models/Carrier';
+import { EditUserCarrier } from './models/editUserCarrier';
 
 const BASE_URL = 'http://localhost:50133/api/';
 @Injectable({
@@ -21,9 +22,14 @@ export class HttpService {
     return this.http.post(BASE_URL + 'admin/CreateUser', body, { responseType: 'text' })
   }
 
-  getUserCarriers() {
-    return this.http.get<UserCarrier[]>(BASE_URL + 'admin/GetAllUsers');
+  editUserCarrier(id:number, body:EditUserCarrier) {
+    return this.http.put(BASE_URL + `admin/EditUser/${id}`, body);
   }
+
+  getUserCarriers() {
+    return this.http.get<UserCarrier[]>(BASE_URL + `admin/GetAllUsers`);
+  }
+
   getCarriers() {
     return this.http.get<Carrier[]>(BASE_URL + 'admin/GetAllCarriers');
   }
